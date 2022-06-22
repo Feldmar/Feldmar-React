@@ -6,10 +6,11 @@ export default class TodoList extends React.Component {
     todoList: [],
     handlerImportant: () => {},
     handlerRemove: () => {},
+    handlerComplet: () => {}
   };
 
   render() {
-    const { todoList, handlerImportant, handlerRemove } = this.props;
+    const { todoList, handlerImportant, handlerRemove,handlerComplet } = this.props;
 
     return (
       <div>
@@ -19,6 +20,7 @@ export default class TodoList extends React.Component {
             item={el}
             handlerImportant={handlerImportant(el.id)}
             handlerRemove={handlerRemove(el.id)}
+            handlerComplet = {handlerComplet(el.id)}
           />
         ))}
       </div>

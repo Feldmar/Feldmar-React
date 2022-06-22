@@ -53,7 +53,6 @@ export default class Todo extends React.Component {
   };
 
   handlerRemove = (id) => {
-
     // this.setState((state) => {
     //   const indx = this.state.todoList.findIndex((el) => el.id === id);
     //   const todoList = [
@@ -73,7 +72,24 @@ export default class Todo extends React.Component {
       })
     };
   }
-    
+  handlerComplet = (id) =>{
+    return (e) => {
+      e.stopPropagation();
+      const arr = this.state.todoList.map((el) => {
+        if (el.id === id) {
+          return { ...el, done: !el.done };
+          
+        } else {
+          return el;
+        }
+      });
+      this.setState({ ...this.state, todoList: arr });
+
+      // const qw = window.confirm ("Удалить задачу?");
+      // qw ? this.handlerRemove() : console.log('error');
+
+    };
+  }
 
   render() {
     const todos = this.filterList();
@@ -89,6 +105,7 @@ export default class Todo extends React.Component {
         todoList={todos}
         handlerImportant={this.handlerImportant}
         handlerRemove = {this.handlerRemove}
+        handlerComplet = {this.handlerComplet}
         />
         <hr />
         <AddTodo handlerAddTodo={this.handlerAddTodo} />
