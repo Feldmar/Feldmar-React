@@ -52,6 +52,29 @@ export default class Todo extends React.Component {
     return this.state.todoList;
   };
 
+  handlerRemove = (id) => {
+
+    // this.setState((state) => {
+    //   const indx = this.state.todoList.findIndex((el) => el.id === id);
+    //   const todoList = [
+    //     ...state.todoList.slice(0, indx),
+    //     ...state.todoList.slice(indx + 1)
+    //   ];
+    //   return { todoList };
+    
+    return (e) => {
+      e.stopPropagation();
+      const data = this.state.todoList.filter((el) => {
+        return el.id !== id;
+      });
+      this.setState({
+        ...this.state, 
+        todoList: data 
+      })
+    };
+  }
+    
+
   render() {
     const todos = this.filterList();
     console.log(todos);
@@ -62,7 +85,11 @@ export default class Todo extends React.Component {
           value={this.state.term}
           handlerChange={this.handlerSerach}
         />
-        <TodoList todoList={todos} handlerImportant={this.handlerImportant} />
+        <TodoList
+        todoList={todos}
+        handlerImportant={this.handlerImportant}
+        handlerRemove = {this.handlerRemove}
+        />
         <hr />
         <AddTodo handlerAddTodo={this.handlerAddTodo} />
       </div>

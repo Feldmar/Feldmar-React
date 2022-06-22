@@ -4,11 +4,12 @@ import TodoItem from "../todo-item/todo-item";
 export default class TodoList extends React.Component {
   static defaultProps = {
     todoList: [],
-    handlerImportant: () => {}
+    handlerImportant: () => {},
+    handlerRemove: () => {},
   };
 
   render() {
-    const { todoList, handlerImportant } = this.props;
+    const { todoList, handlerImportant, handlerRemove } = this.props;
 
     return (
       <div>
@@ -17,6 +18,7 @@ export default class TodoList extends React.Component {
             key={el.id}
             item={el}
             handlerImportant={handlerImportant(el.id)}
+            handlerRemove={handlerRemove(el.id)}
           />
         ))}
       </div>
