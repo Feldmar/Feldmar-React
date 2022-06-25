@@ -1,4 +1,6 @@
 import { Book } from "../types/books";
+import { Characters } from "../types/characters";
+
 
 const path = "https://anapioficeandfire.com/api/";
 
@@ -13,5 +15,9 @@ export default class IceandfireApi {
   //?page=2&pageSize=10
   static async getBooks(page: number, pageSize: number): Promise<Book[]> {
     return await getData(`/books?page=${page}&pageSize=${pageSize}`);
+  }
+
+  static async getCharacters(page: number, pageSize: number): Promise<Characters[]>{
+    return await getData(`/characters?page=${page}&pageSize=${pageSize}`)
   }
 }
