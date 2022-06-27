@@ -1,21 +1,43 @@
-import React from "react";
+import React from 'react';
 import IceandfireApi from "../../servises/iceandfire";
 import { Characters } from "../../types/characters";
-type TProps = any;
-type TState = {
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+type CProps = any;
+
+
+type CState = {
   characters: [] | Characters[];
   isLoading: boolean;
   isError: boolean;
   page: number;
   pageSize: number;
+  open: boolean;
+  setOpen: boolean;
 };
-export default class Character extends React.Component<TProps, TState> {
+
+export default class Character extends React.Component<CProps, CState> {
+  
   state = {
     characters: [],
     isLoading: false,
     isError: false,
     page: 1,
-    pageSize: 10
+    pageSize: 10,
+    open: true,
+    setOpen: true
   };
 
   getCharacters = () => {
@@ -45,9 +67,17 @@ export default class Character extends React.Component<TProps, TState> {
     console.log("componentDidUpdate");
   }
 
+
   render() {
     console.log(this.state);
     const { characters, isLoading, isError } = this.state;
+    const { open, setOpen } = this.state;
+    // const [open, setOpen] = React.useState(false);
+    const handleOpen = () =>  this.setState({ setOpen: true, open: true});
+    const handleClose = () =>  this.setState({ setOpen: false, open: false});
+
+
+
     return (
       <div className="characters">
         {isError && "Error"}
@@ -56,10 +86,30 @@ export default class Character extends React.Component<TProps, TState> {
           !isError &&
           !isLoading &&
           this.state.characters.map((el: Characters) => (
-            <div key={el.name}>
-              {el.name} {el.died}
+            <div key={el.url}>
+
+      <div>
+      <div onClick={handleOpen}> {el.name} </div>  
+      <Modal
+        open={open}onClose={handleClose}aria-labelledby="modal-modal-title"aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          Умер {el.died}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           Гражданство {el.culture}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           Актер {el.playedBy}
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+
             </div>
           ))}
+
+          
         {characters && !isError && (
           <div className="characters-nav">
             <button
