@@ -54,7 +54,7 @@ export default class Character extends React.Component<CProps, CState> {
     this.getCharacters();
   }
 
-  handlerPage = (type: "left" | "right") => {
+  handlerPage = (type: "left" | "right") => () => {
     if (type === "left" && this.state.page > 1) {
       this.setState({ page: this.state.page - 1 });
     } else {
@@ -113,11 +113,11 @@ export default class Character extends React.Component<CProps, CState> {
 
       {characters && !isError && (
       <div className="characters-nav">
-      <button disabled={this.state.page===1} onClick={(_e: any)=> this.handlerPage("left")}
+      <button disabled={this.state.page===1} onClick={this.handlerPage("left")}
         >
         left
       </button>
-      <button onClick={(_e: any)=> this.handlerPage("right")}>
+      <button onClick={this.handlerPage("right")}>
         right
       </button>
       </div>
