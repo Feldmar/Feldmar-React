@@ -39,80 +39,81 @@ const FormComponent = () => {
                 }}>
 
                 <input 
-                type="text" 
-                placeholder="name" 
-                value={state.name} 
-                name={'name'} 
-                onChange={(e)=> {
-                setState({...state, name: e.target.value})
-                }}
+                    type="text"
+                    placeholder="name"
+                    value={state.name}
+                    name={'name'}
+                    onChange={(e)=> {
+                        setState({...state, name: e.target.value})
+                    }}
                 />
 
                 <input 
-                type="text" 
-                placeholder="gender" 
-                value={state.gender} 
-                name={'gender'} 
-                onChange={(e)=> {
-                setState({...state, gender: e.target.value})
-                }}
+                    type="text"
+                    placeholder="gender"
+                    value={state.gender}
+                    name={'gender'}
+                    onChange={(e)=> {
+                        setState({...state, gender: e.target.value})
+                    }}
                 />
 
                 <input 
-                type="date" 
-                placeholder="born" 
-                value={state.born} 
-                name={'born'} 
-                onChange={(e)=> {
-                setState({...state, born: e.target.value})
-                }}
+                    type="date"
+                    placeholder="born"
+                    value={state.born}
+                    name={'born'}
+                    onChange={(e)=> {
+                        setState({...state, born: e.target.value})
+                    }}
                 />
 
                 <input 
-                type="date" 
-                placeholder="died" 
-                value={state.died} 
-                name={'died'} 
-                onChange={(e)=> {
-                setState({...state, died: e.target.value})
-                }}
+                    type="date"
+                    placeholder="died"
+                    value={state.died}
+                    name={'died'}
+                    onChange={(e)=> {
+                        setState({...state, died: e.target.value})
+                    }}
                 />
 
                 {state.books.map((el, i) => (
-                <div key={i}>
-                    <input 
-                    type="text" 
-                    placeholder="books" 
-                    value={state.books[i]} 
-                    name={'books'+i} 
-                    onChange={(e)=> {
-                    state.books[i] = e.target.value;
-                    setState({...state, books: state.books})
-                    }}
-                    />
-                </div>
+                    <div key={i}>
+                        <input
+                            type="text"
+                            placeholder="books"
+                            value={state.books[i]}
+                            name={'books'+i}
+                            onChange={(e)=> {
+                            state.books[i] = e.target.value;
+                             setState({...state, books: state.books})
+                            }}
+                        />
+                    </div>
                 ))}
                 <Button 
-                onClick={(e: any)=> {
-                    const booksS: string[] = state.books;
-                    booksS.push('')
-                    setState({...state, books: booksS})
-                    }}>add book</Button>
+                    onClick={(e: any)=> {
+                        const booksS: string[] = state.books;
+                        booksS.push('')
+                        setState({...state, books: booksS})
+                    }}
+                >add book</Button>
 
 
 
                 {state.titles.map((el, i) => (
-                <div key={i}>
-                    <input 
-                    type="text" 
-                    placeholder="titles" 
-                    value={state.titles[i]} 
-                    name={'titles'+i} 
-                    onChange={(e)=> {
-                    state.titles[i] = e.target.value;
-                    setState({...state, titles: state.titles})}}
-                    />
-                </div>
+                    <div key={i}>
+                        <input
+                            type="text"
+                            placeholder="titles"
+                            value={state.titles[i]}
+                            name={'titles'+i}
+                            onChange={(e)=> {
+                            state.titles[i] = e.target.value;
+                            setState({...state, titles: state.titles})}}
+                        />
+                    </div>
                 ))}
                 <Button 
                 onClick={(e: any)=> {
